@@ -18,14 +18,14 @@ function displayEmotions() {
         //in addition to the still gif to be able to swap out later
         $("#emotions").empty();
         for (var i = 0; i < response.data.length; i++){
-            console.log("original_stil: " + response.data[i].images.original_still.url)
-            var image = $("<img>").attr("src", response.data[i].images.original_still.url);
+            console.log("original_stil: " + response.data[i].images.fixed_height_still.url)
+            var image = $("<img>").attr("src", response.data[i].images.fixed_height_still.url);
 
             //add class to use in the on click event later
             image.addClass("still")
 
             //add attribut to store the moving gif
-            image.attr("gifURL", response.data[i].images.original.url)
+            image.attr("gifURL", response.data[i].images.fixed_height.url)
             // Appending the image
             $("#emotions").append(image);
         }
@@ -69,19 +69,22 @@ function displayEmotions() {
     // This line grabs the input from the textbox
     var emotion = $("#emotion-input").val().trim();
 
-    // Adding the topic from the textbox to our array
+    // Adding the topic from the textbox to the array
     topics.push(emotion);
 
-    // Calling renderButtons which handles the processing of our topic array
+    // Calling renderButtons which handles the processing of the topic array
     renderButtons();
 
   });
 
   // Function for displaying the gifs
-  // We're adding a click event listener to all elements with the class "emotion"
-  // We're adding the event listener to the parent div because it will work for dynamically generated elements
+  // Click event listener to all elements with the class "emotion"
+  // Adding the event listener to the parent div because it will work for dynamically generated elements
   $("#emotion-buttons").on("click", ".emotion", displayEmotions);
 
+  // Function for running the gifs
+  // Click event listener to all elements with the class "still"
+  // Adding the event listener to the parent div because it will work for dynamically generated elements
   $("#emotions").on("click", ".still", runGif);
 
   // Calling the renderButtons function to display the intial buttons
