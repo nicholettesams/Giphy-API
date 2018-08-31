@@ -25,7 +25,7 @@ function displayEmotions() {
             image.addClass("still")
 
             //add attribut to store the moving gif
-            image.attr("gif", response.data[0].images.original.url)
+            image.attr("gifURL", response.data[i].images.original.url)
             // Appending the image
             $("#emotions").append(image);
         }
@@ -35,6 +35,9 @@ function displayEmotions() {
 
   function runGif() {
        console.log("runGif")
+       var gifURL = $(this).attr("gifURL");
+
+       $(this).attr("src", gifURL)
   }
 
   // Function for displaying gif buttons
