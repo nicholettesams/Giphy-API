@@ -19,6 +19,9 @@ function displayEmotions() {
         $("#emotions").empty();
         for (var i = 0; i < response.data.length; i++){
             //create image and set the source to be the still
+            var figure = $("<figure>")
+            var rating = $("<figcaption>").text("Rating: " + response.data[i].rating)
+
             var image = $("<img>").attr("src", response.data[i].images.fixed_height_still.url);
 
             //add class to use in the on click event later
@@ -28,8 +31,11 @@ function displayEmotions() {
             image.attr("gifURL", response.data[i].images.fixed_height.url)
             image.attr("stillURL", response.data[i].images.fixed_height_still.url)
 
-            // Appending the image to the emotions div
-            $("#emotions").append(image);
+            // Appending the image to the figure 
+            figure.append(rating);
+            figure.append(image);
+
+            $("#emotions").append(figure)
         }
         
     });
