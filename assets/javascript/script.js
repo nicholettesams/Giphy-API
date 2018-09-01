@@ -6,7 +6,7 @@ var apiKey = "&apikey=y44Dnu8qwxr5TX82P3bCPbm2IAMZDKdc"
 function displayEmotions() {
     //get the name of the emotion that was clicked
     var emotionName = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + emotionName.replace(' ', '+') + apiKey
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotionName.replace(' ', '+') + apiKey
 
     $.ajax({
       url: queryURL,
