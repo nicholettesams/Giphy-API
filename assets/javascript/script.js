@@ -1,13 +1,13 @@
 //javascript was started using working-movie-app-solved.html and then modified 
 var topics = ["Awkward", "Bored", "Confused", "Drunk", "Excited", "Frustrated", "Hungry", "Mind Blown", "Tired"];
+var apiKey = "&apikey=y44Dnu8qwxr5TX82P3bCPbm2IAMZDKdc"
 
 // Generic function for capturing the emotion name from the data-attribute
 function displayEmotions() {
+    //get the name of the emotion that was clicked
     var emotionName = $(this).attr("data-name");
-
-    var apiKey = "&apikey=y44Dnu8qwxr5TX82P3bCPbm2IAMZDKdc"
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + emotionName.replace(' ', '+') + apiKey
-    console.log(queryURL)
+
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -18,15 +18,17 @@ function displayEmotions() {
         //in addition to the still gif to be able to swap out later
         $("#emotions").empty();
         for (var i = 0; i < response.data.length; i++){
-            console.log("original_stil: " + response.data[i].images.fixed_height_still.url)
+            //create image and set the source to be the still
             var image = $("<img>").attr("src", response.data[i].images.fixed_height_still.url);
 
             //add class to use in the on click event later
-            image.addClass("still")
+            image.addClass("gif")
 
-            //add attribut to store the moving gif
+            //add attribut to store the still and moving gif for later
             image.attr("gifURL", response.data[i].images.fixed_height.url)
-            // Appending the image
+            image.attr("stillURL", response.data[i].images.fixed_height_still.url)
+
+            // Appending the image to the emotions div
             $("#emotions").append(image);
         }
         
@@ -34,10 +36,20 @@ function displayEmotions() {
   }
 
   function runGif() {
-       console.log("runGif")
-       var gifURL = $(this).attr("gifURL");
+        //get the current source
+        var newURL = "";
+        var source = $(this).attr("src");
+        var gifURL = $(this).attr("gifURL"); 
+        var stillURL = $(this).attr("stillURL");
 
-       $(this).attr("src", gifURL)
+        if (source === stillURL){  
+            //if currently the still then swap with the gif 
+            $(this).attr("src", gifURL)
+        } else {
+            //if currently the gif, swap out with the still
+            $(this).attr("src", stillURL)
+        }
+        
   }
 
   // Function for displaying gif buttons
@@ -69,12 +81,13 @@ function displayEmotions() {
     // This line grabs the input from the textbox
     var emotion = $("#emotion-input").val().trim();
 
-    // Adding the topic from the textbox to the array
-    topics.push(emotion);
+    if (emotion != ""){
+        // Adding the topic from the textbox to the array
+        topics.push(emotion);
 
-    // Calling renderButtons which handles the processing of the topic array
-    renderButtons();
-
+        // Calling renderButtons which handles the processing of the topic array
+        renderButtons();
+    }
   });
 
   // Function for displaying the gifs
@@ -83,9 +96,9 @@ function displayEmotions() {
   $("#emotion-buttons").on("click", ".emotion", displayEmotions);
 
   // Function for running the gifs
-  // Click event listener to all elements with the class "still"
+  // Click event listener to all elements with the class "gif"
   // Adding the event listener to the parent div because it will work for dynamically generated elements
-  $("#emotions").on("click", ".still", runGif);
+  $("#emotions").on("click", ".gif", runGif);
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
