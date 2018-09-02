@@ -17,7 +17,8 @@ function displayEmotions() {
         //Need to figure out a way to store the moving gif 
         //in addition to the still gif to be able to swap out later
         $("#emotions").empty();
-        for (var i = 0; i < response.data.length; i++){
+        //for (var i = 0; i < response.data.length; i++){
+        for (var i = 0; i < 10; i++){  //HW instructions said 10 
             //create image and set the source to be the still
             var figure = $("<figure>")
             var rating = $("<figcaption>").text("Rating: " + response.data[i].rating)
@@ -64,7 +65,7 @@ function displayEmotions() {
     $("#emotion-buttons").empty();
 
     // Looping through the array of topics
-    for (var i = 0; i < topics.length; i++) {
+   for (var i = 0; i < topics.length; i++) {   
 
       // Then dynamicaly generating buttons for each topic in the array
       var button = $("<button>");
