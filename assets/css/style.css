@@ -1,6 +1,6 @@
 /* Emotion buttons */
 .emotion, #add-emotion {
-    background-color: #4CAF50; /* Green */
+    background-color: #4aaaa5; 
     border: none;
     color: white;
     padding: 16px 32px;
@@ -17,7 +17,7 @@
 .emotion:hover{
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50;
+    border: 2px solid #4aaaa5;
 }
 
 #emotion-form{

@@ -8,9 +8,7 @@ var append = false;
 // Generic function for capturing the emotion name from the data-attribute
 function displayEmotions() {
     //get the name of the emotion that was clicked
-    if (!append){
-        emotionName = $(this).attr("data-name");
-    }
+    emotionName = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotionName.replace(' ', '+') + apiKey + "&offset=" + offset;
 
     $.ajax({
@@ -21,9 +19,7 @@ function displayEmotions() {
         //Append gifs and ratings 
         //Need to figure out a way to store the moving gif 
         //in addition to the still gif to be able to swap out later
-        if (!append){
-            $("#emotions").empty();
-        }
+        $("#emotions").empty();
         //for (var i = 0; i < response.data.length; i++){
         for (var i = 0; i < 10; i++){  //HW instructions said 10 
             //create image and set the source to be the still
@@ -104,19 +100,6 @@ function displayEmotions() {
         // Calling renderButtons which handles the processing of the topic array
         renderButtons();
     }
-  });
-
-  $("#load-gifs").on("click", function(event) {
-    // Preventing the buttons default behavior when clicked (which is submitting a form)
-    event.preventDefault();
-    console.log("load more gifs")
-    //increase the offset to queried from giphy
-    offset += 10;
-
-    //call the displayEmotions with "append" as true
-    append = true;
-    displayEmotions();
-
   });
 
   // Function for displaying the gifs
