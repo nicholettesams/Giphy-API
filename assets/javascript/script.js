@@ -19,23 +19,26 @@ function displayEmotions() {
         //Append gifs and ratings 
         //Need to figure out a way to store the moving gif 
         //in addition to the still gif to be able to swap out later
+
+        var results = response.data
+
         $("#emotions").empty();
         //for (var i = 0; i < response.data.length; i++){
         for (var i = 0; i < 10; i++){  //HW instructions said 10 
             //create image and set the source to be the still
             var figure = $("<figure>")
             //BONUS: List additional metadata
-            var caption = $("<figcaption>").html("<strong>Title: </strong>" + response.data[i].title + "<br><strong>Rating: </strong>" + response.data[i].rating)
+            var caption = $("<figcaption>").html("<strong>Title: </strong>" + results[i].title + "<br><strong>Rating: </strong>" + response.data[i].rating)
 
             //create image tag
-            var image = $("<img>").attr("src", response.data[i].images.fixed_height_still.url);
+            var image = $("<img>").attr("src", results[i].images.fixed_height_still.url);
 
             //add class to use in the on click event later
             image.addClass("gif")
 
             //add attribut to store the still and moving gif for later
-            image.attr("gifURL", response.data[i].images.fixed_height.url)
-            image.attr("stillURL", response.data[i].images.fixed_height_still.url)
+            image.attr("gifURL", results[i].images.fixed_height.url)
+            image.attr("stillURL", results[i].images.fixed_height_still.url)
 
             // Appending the image to the figure 
             figure.append(caption);
