@@ -34,11 +34,17 @@ figure {
     margin-left: 10px;
     margin-right: 10px;
     float: left;
-    display: table;
+    display: block;
+    height: 250px;
+    width: auto;
 }
 
 figcaption{
-    display: table-caption;
+    display: block;
     caption-side: top;
     font-size: 14px;
+}
+
+img{
+    height: 200px;
 }
